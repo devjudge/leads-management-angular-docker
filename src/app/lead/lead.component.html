@@ -1,0 +1,75 @@
+
+<div class="col-md-12">
+  <!-- button to add lead --><br>
+<div class="col-md-12">
+  <div class=" no-padding">
+      <button id="add_leads" class="btn btn-small btn-black" (click)="openDialog('add-lead')">Add Lead</button>
+      <div class="pull-right" >
+         
+            <input  (keyup)="applyFilter($event.target.value)" class="form-control" placeholder="Search Lead">
+        </div>
+  </div>
+  <div class="col-md-6 no-padding">
+  
+     
+  </div>
+  
+</div><br>
+  <div class="col-md-12">
+      <div  *ngIf="loader" class="loaderDiv col-md-12" >
+          <div class="text-center  loadSubDiv cus-loader">
+              <div class="matLoader" >
+              <mat-spinner></mat-spinner>
+            </div>
+               
+            </div>
+      </div>
+      <table mat-table [dataSource]="dataSource"  matSort class="table table-striped table-bordered "  matSortActive="name">
+
+          <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+        
+          <!-- Position Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+            <td mat-cell *matCellDef="let element" [ngClass]="element.id==leadId?'alert alert-success':' '" > {{element.first_name}} {{element.last_name}}  </td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header> Email </th>
+            <td mat-cell *matCellDef="let element" [ngClass]="element.id==leadId?'alert alert-success':' '">{{element.email}} </td>
+          </ng-container>
+        
+          <!-- Weight Column -->
+          <ng-container matColumnDef="mobile">
+            <th mat-header-cell *matHeaderCellDef> Mobile Num </th>
+            <td mat-cell *matCellDef="let element" [ngClass]="element.id==leadId?'alert alert-success':' '"> {{element.mobile}} </td>
+          </ng-container>
+        
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="locType">
+            <th mat-header-cell *matHeaderCellDef> Location Type </th>
+            <td mat-cell *matCellDef="let element" [ngClass]="element.id==leadId?'alert alert-success':' '"> {{element.location_type}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="locString">
+              <th mat-header-cell *matHeaderCellDef> Location String </th>
+              <td mat-cell *matCellDef="let element" [ngClass]="element.id==leadId?'alert alert-success':' '"> {{element.location_string}} </td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action</th>
+                <td mat-cell *matCellDef="let element" [ngClass]="element.id==leadId?'alert alert-success':' '"> 
+                    &nbsp;&nbsp;
+                    <span id="update_lead" (click)="openDialog('edit-lead',element)" style="cursor:pointer"  matTooltip="Update"><mat-icon>create</mat-icon></span>&nbsp;&nbsp;
+                    <span id="delete_lead" (click)="openDialog('deleteLead',element.id)" style="cursor:pointer" matTooltip="Delete"><mat-icon>delete</mat-icon> </span>             
+                </td>
+              </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row id="{{row}}" *matRowDef="let row = index; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator #paginator  [pageSizeOptions]="[6, 10, 20]" showFirstLastButtons></mat-paginator>
+        
+  </div>
+</div>
