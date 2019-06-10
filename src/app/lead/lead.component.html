@@ -67,7 +67,7 @@
               </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row id="{{row+1}}" *matRowDef="let row = index; columns: displayedColumns;"></tr>
+          <tr mat-row id="row_{{row+1}}" *matRowDef="let row = index; columns: displayedColumns;"></tr>
         </table>
         <mat-paginator #paginator  [pageSizeOptions]="[6, 10, 20]" showFirstLastButtons></mat-paginator>
         
