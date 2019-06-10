@@ -8,4 +8,4 @@ RUN npm install -g http-server
 
 COPY dist/ ./dist
 
-CMD ["http-server", "./dist/my-app"]
+CMD http-server ./dist/my-app -p 4200 -a 0.0.0.0
